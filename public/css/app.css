@@ -8,6 +8,14 @@
   display: block;
 }
 
+.the-main-navbar {
+  min-height: calc(100vh - 55px);
+}
+
+.the-main-navbar .nav-link {
+  color: #DDD;
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

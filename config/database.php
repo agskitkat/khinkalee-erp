@@ -46,9 +46,9 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel_site'),
+            'database' => env('DB_DATABASE', 'mysqitedb'),
             'username' => env('DB_USERNAME', 'mysql'),
             'password' => env('DB_PASSWORD', 'mysql'),
             'unix_socket' => env('DB_SOCKET', ''),
