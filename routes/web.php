@@ -15,3 +15,5 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/filials', 'FilialController@index')->name('filials');
+Route::get('/filial/edit', 'FilialController@editform')->name('filial/edit');
+Route::post('/filial/save', 'FilialController@save')->name('filial/save');
