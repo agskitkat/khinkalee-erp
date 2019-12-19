@@ -19,7 +19,11 @@ Auth::routes();
 
 Route::group(['middleware' => 'checkauth'], function() {
     Route::get('/', 'HomeController@index')->name('home');
+
+    // Работа с филиалом
     Route::get('/filials', 'FilialController@index')->name('filials');
-    Route::get('/filial/edit', 'FilialController@editform')->name('filial/edit');
+    Route::get('/filial/edit/{id?}', 'FilialController@editform')->where('id', '[0-9]+')->name('filial/edit');
     Route::post('/filial/save', 'FilialController@save')->name('filial/save');
+
+    Route::get('/filial/delete/{id}', 'FilialController@delete')->where('id', '[0-9]+')->name('filial/delete');
 });

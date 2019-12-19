@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class FilialController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Показывает все филиалы
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -20,19 +20,27 @@ class FilialController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * форма редактирования филиала
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function editform()
+    public function editform($id = false)
     {
+        if($id) {
+            $filial = Filial::where('id', $id)->first();
+            if(!$filial) {
+                return abort(404);
+            }
+        } else {
+            $filial = new Filial();
+        }
 
-        return view('filials.editform');
+        return view('filials.editform', compact('filial', 'filial'));
     }
 
 
     /**
-     * Show the application dashboard.
+     * процесс редактирования
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -42,7 +50,7 @@ class FilialController extends Controller
         $filial = false;
 
         if($request->id) {
-            $filial = App\Filial::find($request->id);
+            $filial = Filial::find($request->id);
         }
 
         if(!$filial) {
@@ -53,6 +61,23 @@ class FilialController extends Controller
         $filial->address = $request->address;
         $filial->save();
 
-        return view('filials.editform')->with('message', []);
+        return redirect()->route('filial/edit',  ['id' => $filial->id, 'message' => ['Обновлено']]);
+
+    }
+
+    /**
+     * удаление филиала
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function delete($id) {
+
+        $flight = Filial::find($id);
+        if(!$flight) {
+            return abort(404);
+        }
+        $flight->delete();
+
+        return redirect()->route('filials');
     }
 }
