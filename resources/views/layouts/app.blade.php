@@ -23,7 +23,7 @@
 <body>
     <div id="app">
 
-        <div class="container-fluid bg-dark">
+        <div class="container-fluid bg-dark border-bottom">
             <nav class="navbar navbar-expand-md navbar-dark shadow-sm">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
