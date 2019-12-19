@@ -11,7 +11,13 @@
 |
 */
 
-Auth::routes();
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('disallow', function() {
+    return "Disallow";
+});
 
-Route::get('/filials', 'FilialController@index')->name('filials');
+Auth::routes();
+
+Route::group(['middleware' => 'checkauth'], function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/filials', 'FilialController@index')->name('filials');
+});
