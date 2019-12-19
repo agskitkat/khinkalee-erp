@@ -2,64 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
+use App\Filial;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class UserController extends Controller
 {
     /**
-     * Показывает все роли
+     * Показывает все филиалы
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        $list = Role::all();
-        return view('role.list', compact('list', 'list'));
+        $list = User::all();
+        return view('user.list', compact('list', 'list'));
     }
 
     /**
-     * Форма редактирования роли
+     * Форма редактирования филиала
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function edit($id = false)
     {
         if($id) {
-            $role = Role::where('id', $id)->first();
-            if(!$role) {
+            $user = User::where('id', $id)->first();
+            if(!$user ) {
                 return abort(404);
             }
         } else {
-            $role = new Role();
+            $user  = new User();
         }
 
-        return view('role.edit', compact('role', 'role'));
+        return view('user.edit', compact('user', 'user'));
     }
 
 
     /**
-     * Процесс редактирования роли
+     * Процесс редактирования
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function save(Request $request)
     {
         $isNew = false;
-        $role = false;
+        $user = false;
 
         if($request->id) {
-            $role = Role::find($request->id);
+            $user = User::find($request->id);
         }
 
-        if(!$role) {
+        if(!$user) {
             $isNew = true;
-            $role = new Role();
+            $user = new User();
         }
 
-        $role->name = $request->name;
-        $role->code = $request->code;
-        $role->save();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
 
         if( $isNew ) {
             flash('Создано !')->success()->important();
@@ -67,21 +69,21 @@ class RoleController extends Controller
             flash('Обновлено !')->success()->important();
         }
 
-        return redirect()->route('role/edit',  ['id' => $role->id]);
+        return redirect()->route('user/edit',  ['id' => $user->id]);
     }
 
     /**
-     * Удаление роли
+     * Удаление филиала
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function delete($id) {
-        $role = Role::find($id);
-        if(!$role) {
+        $user = User::find($id);
+        if(!$user) {
             return abort(404);
         }
-        $role->delete();
+        $user->delete();
 
-        return redirect()->route('roles');
+        return redirect()->route('users');
     }
 }

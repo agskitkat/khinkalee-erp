@@ -139,6 +139,7 @@
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
     </include_path>
   </component>
   <component name="ProjectId" id="1V6XBrNDyiGRLkk5pFlSZ3VnrLQ" />
@@ -149,13 +150,16 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/W2/saunanekrasovka" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/role" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\role" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\user" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\app\Http\Controllers" />
       <recent name="D:\OpenServer\OSPanel\domains\khinkalee-erp\resources\lang\ru" />
     </key>
   </component>

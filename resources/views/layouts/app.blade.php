@@ -22,7 +22,9 @@
 </head>
 <body>
     <div id="app">
-
+        <div class="messages fixed-top p-4">
+            @include('flash::message')
+        </div>
         <div class="container-fluid bg-dark border-bottom">
             <nav class="navbar navbar-expand-md navbar-dark shadow-sm">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -95,7 +97,10 @@
                             <a class="nav-link" href="#">Поставщики</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Группы и пользователи</a>
+                            <a class="nav-link" href="{{route('users')}}">Пользователи</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('roles')}}">Роли</a>
                         </li>
                     </nav>
                 </div>
