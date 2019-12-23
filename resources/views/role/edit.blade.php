@@ -30,6 +30,21 @@
                        name="code"
                        placeholder="Код">
             </div>
+
+            <div class="form-group">
+                <label>Допустимые операции</label>
+                @if($permissionsList)
+                    @foreach($permissionsList as $p)
+                        <div class="form-check">
+                            <input type="checkbox" name="permissions[]" value="{{ $p->id }}" @if($role->hasPermission($p->code)) checked @endif>
+                            <label class="form-check-label">
+                                {{$p->name}}
+                            </label>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+
             @if(!$role->id)
                 <button type="submit" class="btn btn-primary">Создать</button>
             @else

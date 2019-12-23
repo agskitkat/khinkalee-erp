@@ -12,20 +12,24 @@ class FilialController extends Controller
      * Показывает все филиалы
      *
      * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
+        $this->authorize('viewAny', Filial::class);
         $list = Filial::all();
-        return view('filials.filials', compact('list', 'list'));
+        return view('filials.filials', compact('list'));
     }
 
     /**
      * форма редактирования филиала
      *
      * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function editform($id = false)
     {
+        $this->authorize('viewAny', Filial::class);
         if($id) {
             $filial = Filial::where('id', $id)->first();
             if(!$filial) {
@@ -34,7 +38,6 @@ class FilialController extends Controller
         } else {
             $filial = new Filial();
         }
-
         return view('filials.editform', compact('filial', 'filial'));
     }
 
@@ -43,17 +46,17 @@ class FilialController extends Controller
      * процесс редактирования
      *
      * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function save(Request $request)
-    {
+    public function save(Request $request) {
         $message = [];
         $filial = false;
-
         if($request->id) {
             $filial = Filial::find($request->id);
         }
 
         if(!$filial) {
+            $this->authorize('create', Filial::class);
             $filial = new Filial();
         }
 
@@ -61,7 +64,7 @@ class FilialController extends Controller
         $filial->address = $request->address;
         $filial->save();
 
-        return redirect()->route('filial/edit',  ['id' => $filial->id, 'message' => ['Обновлено']]);
+        return redirect()->route('filial/edit',  ['id' => $filial->id]);
 
     }
 

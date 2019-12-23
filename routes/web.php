@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Auth\Access\Gate;
+
 Route::get('disallow', function() {
     return "Disallow";
 });
@@ -37,6 +39,12 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::get('/role/edit/{id?}', 'RoleController@edit')->where('id', '[0-9]+')->name('role/edit');
     Route::post('/role/save', 'RoleController@save')->name('role/save');
     Route::get('/role/delete/{id}', 'RoleController@delete')->where('id', '[0-9]+')->name('role/delete');
+
+    // Роли пользователей
+    Route::get('/permissions', 'PermissionController@index')->name('permissions');
+    Route::get('/permission/edit/{id?}', 'PermissionController@edit')->where('id', '[0-9]+')->name('permission/edit');
+    Route::post('/permission/save', 'PermissionController@save')->name('permission/save');
+    Route::get('/permission/delete/{id}', 'PermissionController@delete')->where('id', '[0-9]+')->name('permission/delete');
 
 
 });

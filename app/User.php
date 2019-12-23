@@ -79,4 +79,36 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    function hasPermissions(Array $arPermissionCode, $model = false) {
+        $roles = $this->getRoles();
+
+        if(count($roles)) {
+            foreach($roles as $role) {
+                $code = $role->code;
+
+                if($code === "superadmin") {
+                    return true;
+                }
+
+                $role = Role::where('code', $code)->first();
+
+                if($role) {
+                    foreach ($arPermissionCode as $PermissionCode) {
+                        if ($role->hasPermission($PermissionCode)) {
+                            if(!$model) {
+                                return true;
+                            } else {
+                                if($model->user_id === $this->id) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
