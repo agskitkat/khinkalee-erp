@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filial;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,14 @@ class UserController extends Controller
             $user  = new User();
         }
 
-        return view('user.edit', compact('user', 'user'));
+        $roles = Role::all();
+        if(count( $roles )) {
+
+        }
+
+        $userRoles = $user->getRoles();
+
+        return view('user.edit',  ['user' => $user, 'roles' => $roles, 'userRoles' => $userRoles]);
     }
 
 
@@ -63,13 +71,19 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->save();
 
+        foreach($request->roles as $role) {
+            var_dump( $role );
+            // TODO: делать туту
+            GroupRole::where('role_id', '=', $role);
+        }
+
         if( $isNew ) {
             flash('Создано !')->success()->important();
         } else {
             flash('Обновлено !')->success()->important();
         }
 
-        return redirect()->route('user/edit',  ['id' => $user->id]);
+        //return redirect()->route('user/edit',  ['id' => $user->id]);
     }
 
     /**

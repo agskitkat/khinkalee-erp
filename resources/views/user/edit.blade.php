@@ -32,9 +32,16 @@
             </div>
             <div class="form-group">
                 <label>Роли</label>
-                <div class="">
-
-                </div>
+                @if($roles)
+                    @foreach($roles as $role)
+                        <div class="form-check">
+                            <input type="checkbox" name="roles[]" value="{{ $role->id }}" @if($user->hasRole($role->code)) checked @endif>
+                            <label class="form-check-label">
+                                {{$role->name}}
+                            </label>
+                        </div>
+                    @endforeach
+                @endif
             </div>
             @if(!$user->id)
                 <button type="submit" class="btn btn-primary">Создать</button>
