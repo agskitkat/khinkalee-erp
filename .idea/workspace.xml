@@ -150,13 +150,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/role" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/provider" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\provider" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\role" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\user" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\app\Http\Controllers" />
@@ -213,6 +214,7 @@
       <workItem from="1576600881402" duration="2432000" />
       <workItem from="1576609560391" duration="612000" />
       <workItem from="1576610183570" duration="3329000" />
+      <workItem from="1577086186612" duration="8483000" />
     </task>
     <servers />
   </component>

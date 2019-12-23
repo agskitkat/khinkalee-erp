@@ -94,7 +94,7 @@
                             <a class="nav-link" href="#">Продукты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Поставщики</a>
+                            <a class="nav-link" href="{{route('providers')}}">Поставщики</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('users')}}">Пользователи</a>

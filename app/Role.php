@@ -14,5 +14,7 @@ class Role extends Model
         return $this->belongsToMany('App\User', 'user_role', 'user_id', 'role_id');
     }
 
-
+    function getAllRoutes() {
+        Route::currentRouteName();
+    }
 }

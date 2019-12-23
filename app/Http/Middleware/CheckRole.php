@@ -15,6 +15,8 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
+        echo Route::currentRouteName();
+        exit();
         $result = $request->user()->hasRole($role);
         if(!$result) {
             redirect('/');

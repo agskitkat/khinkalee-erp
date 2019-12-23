@@ -38,5 +38,13 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::post('/role/save', 'RoleController@save')->name('role/save');
     Route::get('/role/delete/{id}', 'RoleController@delete')->where('id', '[0-9]+')->name('role/delete');
 
+    // Методы поставщика
+    Route::get('/providers', 'ProviderController@index')->name('providers');
+    Route::get('/provider/edit/{id?}', 'ProviderController@edit')->where('id', '[0-9]+')->name('provider/edit');
+    Route::post('/provider/save', 'ProviderController@save')->name('provider/save');
+    Route::get('/provider/delete/{id}', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/delete');
+
+
+    //Route::get('/provider/{id}/products', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/products');
 
 });
