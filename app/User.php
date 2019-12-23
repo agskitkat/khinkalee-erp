@@ -51,6 +51,26 @@ class User extends Authenticatable
         return $roles;
     }
 
+    function setRole($arRolesId = []) {
+        DB::table('user_role')
+            ->where('user_id', '=',  $this->id)
+            ->delete();
+
+        if(count($arRolesId)) {
+
+            $arQuery = [];
+
+            foreach($arRolesId as $roleId) {
+                $arQuery[] = ['user_id' => $this->id, 'role_id' => $roleId];
+            }
+
+            DB::table('user_role')->insert(
+                $arQuery
+            );
+        }
+
+    }
+
     function hasRole($roleCode) {
         foreach($this->roles as $user_role) {
            if($roleCode === $user_role->code) {

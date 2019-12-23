@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filial;
+use App\GroupRole;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -71,11 +72,13 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        foreach($request->roles as $role) {
-            var_dump( $role );
-            // TODO: делать туту
-            GroupRole::where('role_id', '=', $role);
+        $arRoles = [];
+        if($request->roles) {
+            foreach ($request->roles as $role) {
+                $arRoles[] = +$role;
+            }
         }
+        $user->setRole($arRoles);
 
         if( $isNew ) {
             flash('Создано !')->success()->important();
@@ -83,7 +86,7 @@ class UserController extends Controller
             flash('Обновлено !')->success()->important();
         }
 
-        //return redirect()->route('user/edit',  ['id' => $user->id]);
+        return redirect()->route('user/edit',  ['id' => $user->id]);
     }
 
     /**
