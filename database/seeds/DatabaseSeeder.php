@@ -128,5 +128,29 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Операции с группами продуктов
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: чтение",
+            'code' => 'group_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: создание",
+            'code' => 'group_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: изменение всех",
+            'code' => 'group_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: изменение только себя",
+            'code' => 'group_self_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: удаление",
+            'code' => 'group_remove'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Группа продукта: удаление только себя",
+            'code' => 'group_remove_self'
+        ]);
     }
 }
