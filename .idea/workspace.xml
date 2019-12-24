@@ -140,6 +140,7 @@
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/vendor/dlnsk/h-rbac" />
     </include_path>
   </component>
   <component name="ProjectId" id="1V6XBrNDyiGRLkk5pFlSZ3VnrLQ" />

@@ -102,6 +102,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('roles')}}">Роли</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('permissions')}}">Операции</a>
+                        </li>
                     </nav>
                 </div>
                 <div class="container bg-white p-4 col-lg-9">

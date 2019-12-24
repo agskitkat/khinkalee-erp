@@ -39,10 +39,6 @@ class UserController extends Controller
         }
 
         $roles = Role::all();
-        if(count( $roles )) {
-
-        }
-
         $userRoles = $user->getRoles();
 
         return view('user.edit',  ['user' => $user, 'roles' => $roles, 'userRoles' => $userRoles]);

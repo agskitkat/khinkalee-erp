@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Auth\Access\Gate;
+
 Route::get('disallow', function() {
     return "Disallow";
 });
@@ -44,6 +46,11 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::post('/provider/save', 'ProviderController@save')->name('provider/save');
     Route::get('/provider/delete/{id}', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/delete');
 
+    // Роли пользователей
+    Route::get('/permissions', 'PermissionController@index')->name('permissions');
+    Route::get('/permission/edit/{id?}', 'PermissionController@edit')->where('id', '[0-9]+')->name('permission/edit');
+    Route::post('/permission/save', 'PermissionController@save')->name('permission/save');
+    Route::get('/permission/delete/{id}', 'PermissionController@delete')->where('id', '[0-9]+')->name('permission/delete');
 
     //Route::get('/provider/{id}/products', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/products');
 
