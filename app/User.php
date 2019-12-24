@@ -99,7 +99,10 @@ class User extends Authenticatable
                             if(!$model) {
                                 return true;
                             } else {
-                                if($model->user_id === $this->id) {
+
+                                if($model->user_id === $this->id
+                                    || (get_class($model) === 'User' && $this->id === $model->id )
+                                ) {
                                     return true;
                                 }
                             }

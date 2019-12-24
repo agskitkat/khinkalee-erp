@@ -53,10 +53,13 @@ class FilialController extends Controller
         $filial = false;
         if($request->id) {
             $filial = Filial::find($request->id);
+            // Можно ли редактировать ?
+            $this->authorize('update',  $filial);
         }
 
         if(!$filial) {
-            $this->authorize('create', Filial::class);
+            // Можно ли создавать ?
+            $this->authorize('create', $filial);
             $filial = new Filial();
         }
 
@@ -75,11 +78,13 @@ class FilialController extends Controller
      */
     public function delete($id) {
 
-        $flight = Filial::find($id);
-        if(!$flight) {
+        $filial = Filial::find($id);
+        $this->authorize('delete',  $filial);
+
+        if(!$filial) {
             return abort(404);
         }
-        $flight->delete();
+        $filial->delete();
 
         return redirect()->route('filials');
     }

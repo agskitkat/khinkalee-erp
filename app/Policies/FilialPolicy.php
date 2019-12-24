@@ -51,14 +51,11 @@ class FilialPolicy
      * @return mixed
      */
     public function update(User $user, Filial $filial) {
-
         if( $user->hasPermissions(['filials_update'])) {
             return true;
         } else {
             return $user->hasPermissions(['filials_self'], $filial);
         }
-
-
     }
 
     /**
@@ -70,7 +67,11 @@ class FilialPolicy
      */
     public function delete(User $user, Filial $filial)
     {
-        //
+        if( $user->hasPermissions(['filials_remove'])) {
+            return true;
+        } else {
+            return $user->hasPermissions(['filials_remove_self'], $filial);
+        }
     }
 
     /**

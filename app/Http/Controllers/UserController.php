@@ -18,6 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         $list = User::all();
         return view('user.list', compact('list', 'list'));
     }
@@ -29,6 +30,7 @@ class UserController extends Controller
      */
     public function edit($id = false)
     {
+        $this->authorize('viewAny', User::class);
         if($id) {
             $user = User::where('id', $id)->first();
             if(!$user ) {
@@ -57,11 +59,13 @@ class UserController extends Controller
 
         if($request->id) {
             $user = User::find($request->id);
+            $this->authorize('update',  $user);
         }
 
         if(!$user) {
             $isNew = true;
             $user = new User();
+            $this->authorize('create', $user);
         }
 
         $user->name = $request->name;
@@ -92,6 +96,7 @@ class UserController extends Controller
      */
     public function delete($id) {
         $user = User::find($id);
+        $this->authorize('delete',  $user);
         if(!$user) {
             return abort(404);
         }
