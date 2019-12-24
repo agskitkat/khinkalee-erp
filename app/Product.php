@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'ID_T_PRODUCT_GROUP', 'NAME', 'STRONG_REL',
+        'id_product_group', 'name', 'strong_rel'
     ];
+
+    function getGroupName() {
+        if(!$this->id_product_group) {
+            return "Без группы";
+        }
+        $group = ProductGroup::find($this->id_product_group);
+        return $group->name;
+    }
+
+    function getStrong() {
+        return "TODO";
+    }
 }

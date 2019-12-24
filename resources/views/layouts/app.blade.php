@@ -87,15 +87,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('filials')}}">Филиалы</a>
                         </li>
+                        <hr>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Закупки</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Продукты</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{route('providers')}}">Поставщики</a>
                         </li>
+                        <hr>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('products')}}">Продукты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('groups')}}">Группы продуктов</a>
+                        </li>
+                        <hr>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('users')}}">Пользователи</a>
                         </li>

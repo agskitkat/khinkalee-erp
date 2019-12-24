@@ -74,6 +74,7 @@ class DatabaseSeeder extends Seeder
             'name' => "Филиал: Удалить свой",
             'code' => 'filials_remove_self'
         ]);
+
         // Операции пользователей
         DB::table('permissions')->insert([
             'name' => "Пользователь: чтение",
@@ -99,5 +100,33 @@ class DatabaseSeeder extends Seeder
             'name' => "Пользователь: удаление только себя",
             'code' => 'user_remove_self'
         ]);
+
+        // Операции с используемыми товарами
+        DB::table('permissions')->insert([
+            'name' => "Продукт: чтение",
+            'code' => 'product_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Продукт: создание",
+            'code' => 'product_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Продукт: изменение всех",
+            'code' => 'product_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Продукт: изменение только себя",
+            'code' => 'product_self_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Продукт: удаление",
+            'code' => 'product_remove'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Продукт: удаление только себя",
+            'code' => 'product_remove_self'
+        ]);
+
+        // Операции с группами продуктов
     }
 }

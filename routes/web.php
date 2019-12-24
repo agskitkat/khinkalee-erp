@@ -46,12 +46,21 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::post('/provider/save', 'ProviderController@save')->name('provider/save');
     Route::get('/provider/delete/{id}', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/delete');
 
-    // Роли пользователей
+    // Возможные операции
     Route::get('/permissions', 'PermissionController@index')->name('permissions');
     Route::get('/permission/edit/{id?}', 'PermissionController@edit')->where('id', '[0-9]+')->name('permission/edit');
     Route::post('/permission/save', 'PermissionController@save')->name('permission/save');
     Route::get('/permission/delete/{id}', 'PermissionController@delete')->where('id', '[0-9]+')->name('permission/delete');
 
-    //Route::get('/provider/{id}/products', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/products');
+    // Роутер используемых продуктов
+    Route::get('/products/{filter?}', 'ProductController@index')->name('products');
+    Route::get('/product/edit/{id?}', 'ProductController@edit')->where('id', '[0-9]+')->name('product/edit');
+    Route::post('/product/save', 'ProductController@save')->name('product/save');
+    Route::get('/product/delete/{id}', 'ProductController@delete')->where('id', '[0-9]+')->name('product/delete');
 
+    // Роутер групп продуктов
+    Route::get('/group', 'ProductGroupController@index')->name('groups');
+    Route::get('/group/edit/{id?}', 'ProductGroupController@edit')->where('id', '[0-9]+')->name('group/edit');
+    Route::post('/group/save', 'ProductGroupController@save')->name('group/save');
+    Route::get('/group/delete/{id}', 'ProductGroupController@delete')->where('id', '[0-9]+')->name('group/delete');
 });
