@@ -10,7 +10,7 @@ class Provider extends Model
     //
 
     protected $fillable = [
-        'name', 'email',
+        'name', 'email', 'excel_rules'
     ];
 
     function products() {

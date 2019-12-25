@@ -45,6 +45,14 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::get('/provider/edit/{id?}', 'ProviderController@edit')->where('id', '[0-9]+')->name('provider/edit');
     Route::post('/provider/save', 'ProviderController@save')->name('provider/save');
     Route::get('/provider/delete/{id}', 'ProviderController@index')->where('id', '[0-9]+')->name('provider/delete');
+    Route::get('/provider/excel/{id}', 'ProviderController@excel')->where('id', '[0-9]+')->name('providers/excel');
+    Route::post('/provider/excel_process/{id}', 'ProviderController@excel_process')->where('id', '[0-9]+')->name('providers/excel_process');
+
+    // Маршруты товара поставщика
+    Route::get('/provider-products', 'ProviderProductsController@index')->name('provider-products');
+    Route::get('/provider-product/edit/{id?}', 'ProviderProductsController@edit')->where('id', '[0-9]+')->name('provider-product/edit');
+    Route::post('/provider-product/save', 'ProviderProductsController@save')->name('provider-product/save');
+    Route::get('/provider-product/delete/{id}', 'ProviderProductsController@delete')->where('id', '[0-9]+')->name('provider-product/delete');
 
     // Возможные операции
     Route::get('/permissions', 'PermissionController@index')->name('permissions');

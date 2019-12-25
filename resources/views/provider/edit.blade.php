@@ -30,6 +30,10 @@
                        name="email"
                        placeholder="Email">
             </div>
+            <div class="form-group">
+                <label>Правила обработки Excel</label>
+                <textarea class="form-control" name="excel_rules">{{$provider->excel_rules}}</textarea>
+            </div>
             @if(!$provider->id)
                 <button type="submit" class="btn btn-primary">Создать</button>
             @else

@@ -17,12 +17,12 @@ class CreateProvidersTable extends Migration
             $table->bigIncrements('id');
             $table->text('email');
             $table->text('name');
+            $table->text('excel_rules');
             $table->timestamps();
         });
 
         Schema::create('provider_goods', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('email');
             $table->bigInteger('providers_id')->unsigned();
             $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
             $table->string('article', 255)->unique();
