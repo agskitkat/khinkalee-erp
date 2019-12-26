@@ -14,9 +14,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Название</th>
-                <th scope="col">Email</th>
-                <th scope="col">Товаров</th>
-                <th scope="col">Синхронизация</th>
+                <th scope="col">Еденица</th>
+                <th scope="col">Цена</th>
                 <th scope="col">Действия</th>
             </tr>
             </thead>
@@ -25,11 +24,8 @@
                 <tr>
                     <th>{{ $product->id }}</th>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->email }}</td>
-                    <td>{{ $product->countProduct() }}</td>
-                    <td>
-                        <a href="#">Excel</a>
-                    </td>
+                    <td>{{ $product->measure }}</td>
+                    <td>{{ $product->price }}</td>
                     <td>
                         <a href="{{ route('provider-product/delete', ['id'=>$product->id]) }}">Удалить</a>
                         <a href="{{ route('provider-product/edit', ['id'=>$product->id]) }}">Редактировать</a>

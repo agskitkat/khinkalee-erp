@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Provider;
+use App\ProviderProducts;
 use Exception;
 use Illuminate\Http\Request;
 use SimpleXLSX;
@@ -135,28 +136,126 @@ class ProviderController extends Controller
             return redirect()->route('providers/excel', ['id'=> $provider->id]);
         }
 
-        echo "<pre>";
-        print_r($obrules);
-        echo "</pre>";
+
         $table = $xlsx->rows();
         $products = [];
         if($table) {
-            foreach ($xlsx->rows() as $row) {
-                $product = $this->parceRow($row, $obrules);
-                $products[] = $product;
+            if(isset($obrules->sittings->offsetRows)) {
+                $table = array_slice($table, intval($obrules->sittings->offsetRows));
+            }
+            foreach ($table as $row) {
+                if($this->checkGoodRow($row, $obrules->sittings)) {
+                    $product = $this->parceRow($row, $obrules, $provider->id);
+                    $products[] = $product;
+                }
             }
         } else {
             flash("Таблица пуста")->warning()->important();
             return redirect()->route('providers/excel', ['id'=> $provider->id]);
         }
 
-        //dd( $obrules );
-
-        //return view('provider.excel_upload', compact('provider'));
+        return view('provider.excel_result', compact('products'));
     }
 
 
-    protected function parceRow($row, $rules) {
+    protected function parceRow($row, $rules, $provider_id) {
+       /*
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
+       */
 
+        // Получаем данные по правилам
+        $article = trim($this->research($row, $rules->article));
+        $price   = $this->research($row, $rules->price);
+        $name    = $this->research($row, $rules->name);
+        $measure = $this->research($row, $rules->measure);
+
+
+        $result = [
+            "article" => $article,
+            "price" => $price,
+            "name" => $name,
+            "measure" => trim($measure),
+
+            /*
+            "mass" => $mass,
+            "divider" => $divider
+            */
+        ];
+
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+
+        return $result;
+
+        // Проверяем, есть ли такой в базе по артикулу
+        $good = ProviderProducts::where('article', '=', $article)
+            ->where('providers_id', '=', $provider_id)
+            ->first();
+
+        if(!$good) {
+            $good = new ProviderProducts;
+            $good->isnew = true;
+        } else {
+            $good->isnew = false;
+        }
+
+        $good->providers_id = $provider_id;
+        $good->article = $article;
+        $good->price = $price;
+        $good->name = $name;
+        $good->measure = $measure;
+        $good->mass = 1;
+        $good->divider = 1;
+        $good->save();
+
+        return $good;
+    }
+
+    protected function research($row, $ruleName) {
+        if(isset($ruleName)) {
+            if(isset($ruleName->pos)) {
+                $strRow = "" . $row[$ruleName->pos];
+
+                if(isset($ruleName->regexp)) {
+
+                }
+
+                $result = $strRow;
+            } else {
+                // TODO: Если позиция не указана, то пробуем условие
+            }
+        } else {
+            // TODO: Что то делать если нет значения !!!
+            $result = "BAD";
+        }
+
+        // Преобразование к формату
+        if(isset($ruleName->sprintf)) {
+            $result = $this->formatString($result, $ruleName->sprintf);
+        }
+
+        return $result;
+    }
+
+    protected function checkGoodRow($row, $sittings) {
+        if(isset($sittings->goodRowCountParam)) {
+            $notEmptyColsCount = 0;
+            foreach($row as $col) {
+                if(!empty($col)) {
+                    $notEmptyColsCount++;
+                }
+            }
+            if($notEmptyColsCount < intval($sittings->goodRowCountParam)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected function formatString($str, $format) {
+       return sprintf($format, $str);
     }
 }
