@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\MeasureConverter\MeasureConverter;
 use App\Provider;
 use App\ProviderProducts;
 use Exception;
@@ -145,8 +146,7 @@ class ProviderController extends Controller
             }
             foreach ($table as $row) {
                 if($this->checkGoodRow($row, $obrules->sittings)) {
-                    $product = $this->parceRow($row, $obrules, $provider->id);
-                    $products[] = $product;
+                    $products[] = $this->parceRow($row, $obrules, $provider->id);
                 }
             }
         } else {
@@ -154,23 +154,26 @@ class ProviderController extends Controller
             return redirect()->route('providers/excel', ['id'=> $provider->id]);
         }
 
-        return view('provider.excel_result', compact('products'));
+        return view('provider.excel_result', [
+            'products' => $products,
+            'provider' => $provider
+        ]);
     }
 
 
     protected function parceRow($row, $rules, $provider_id) {
-       /*
-        echo "<pre>";
+
+        /*echo "<pre>";
         print_r($row);
         echo "</pre>";
-       */
+        exit();*/
 
         // Получаем данные по правилам
-        $article = trim($this->research($row, $rules->article));
-        $price   = $this->research($row, $rules->price);
-        $name    = $this->research($row, $rules->name);
-        $measure = $this->research($row, $rules->measure);
-
+        $article = trim($this->research($row, $rules, 'article'));
+        $price   = $this->research($row, $rules,'price');
+        $name    = $this->research($row, $rules,'name');
+        $measure = $this->research($row, $rules,'measure');
+        $mass    = $this->research($row, $rules,'mass');
 
         $result = [
             "article" => $article,
@@ -184,11 +187,11 @@ class ProviderController extends Controller
             */
         ];
 
-        echo "<pre>";
+        /*echo "<pre>";
         print_r($result);
-        echo "</pre>";
+        echo "</pre>";*/
 
-        return $result;
+        //return $result;
 
         // Проверяем, есть ли такой в базе по артикулу
         $good = ProviderProducts::where('article', '=', $article)
@@ -197,9 +200,6 @@ class ProviderController extends Controller
 
         if(!$good) {
             $good = new ProviderProducts;
-            $good->isnew = true;
-        } else {
-            $good->isnew = false;
         }
 
         $good->providers_id = $provider_id;
@@ -207,33 +207,82 @@ class ProviderController extends Controller
         $good->price = $price;
         $good->name = $name;
         $good->measure = $measure;
-        $good->mass = 1;
+        $good->mass = $mass;
         $good->divider = 1;
         $good->save();
 
         return $good;
     }
 
-    protected function research($row, $ruleName) {
-        if(isset($ruleName)) {
-            if(isset($ruleName->pos)) {
-                $strRow = "" . $row[$ruleName->pos];
 
-                if(isset($ruleName->regexp)) {
+    protected function research($row, $rules, $name) {
 
+        $result = 0;
+        if(isset($rules->{$name})) {
+            $ruleName = $rules->{$name};
+
+            if(isset($ruleName->default)) {
+                $default = $ruleName->default;
+            }  else {
+                $default = $result;
+            }
+
+            // expression - Правило при положительном результате которого,
+            // будет выполнены следующие преобразования,
+            // если такого правила нет, возвращается ложь.
+            if(isset($ruleName->expression)) {
+                if(isset($rules->{$ruleName->expression})) {
+                    $expression_result = $this->research($row, $rules, $ruleName->expression);
+                    if(!$expression_result) {
+                        return 0;
+                    }
+                } else {
+                    return 0;
                 }
+            }
 
-                $result = $strRow;
+            // Если указна позиция, ищем в колонке
+            if(isset($ruleName->pos)) {
+                $result = $row[$ruleName->pos]?:0;
             } else {
-                // TODO: Если позиция не указана, то пробуем условие
+                // Если позиция не указана, то пробуем рекурсию до первой победы ))
+                // ОСТОРОЖНО РЕКУРСИЯ !
+                if(!isset($ruleName->recursive)) {
+                    $result = $default;
+                } else {
+                    if(!count($ruleName->recursive)) {
+                        $result = $default;
+                    }
+                    foreach($ruleName->recursive as $deepRule) {
+                        $result = $this->research($row, $rules, $deepRule);
+                        if($result) {
+                          break;
+                        }
+                    }
+                }
             }
         } else {
             // TODO: Что то делать если нет значения !!!
-            $result = "BAD";
+            return 0;
         }
 
-        // Преобразование к формату
-        if(isset($ruleName->sprintf)) {
+        // regexp - поиск по регулярному рыражению, допустим если надо выделить массу из названия
+        if($result && isset($ruleName->regexp)) {
+            preg_match($ruleName->regexp, $result, $matches, PREG_UNMATCHED_AS_NULL);
+            if(isset($matches[0])) {
+                $result = $matches[0];
+            } else {
+                $result = $default;
+            }
+        }
+
+        //
+        if($result && isset($ruleName->ismass)) {
+            $result = MeasureConverter::converte($result);
+        }
+
+        // sprintf - форматирование строки, например денежной или числовой (гугли php sprintf)
+        if($result && isset($ruleName->sprintf)) {
             $result = $this->formatString($result, $ruleName->sprintf);
         }
 
