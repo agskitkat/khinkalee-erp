@@ -31,14 +31,20 @@
                     @endforeach
                 </select>
             </div>
+
             <div class="form-group">
                 <label>Жёская привязка к товару поставщика</label>
-                <input type="number"
-                       value="{{$product->strong_rel}}"
-                       class="form-control"
-                       name="strong_rel"
-                       placeholder="Жёская привязка к товару поставщика">
+                <Searchppc
+                    placeholder="Жёская привязка к товару поставщика"
+                    name="strong_rel"
+                    type="number"
+                    value="{{$product->strong_rel}}"
+                    valuename="{{ $product->getStrong()['name'] }}"
+                    url="{{route('provider-products/search')}}"
+                    csrf="{{ csrf_token() }}">
+                </Searchppc>
             </div>
+
             @if(!$product->id)
                 <button type="submit" class="btn btn-primary">Создать</button>
             @else

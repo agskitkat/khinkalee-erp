@@ -53,6 +53,7 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::get('/provider-product/edit/{id?}', 'ProviderProductsController@edit')->where('id', '[0-9]+')->name('provider-product/edit');
     Route::post('/provider-product/save', 'ProviderProductsController@save')->name('provider-product/save');
     Route::get('/provider-product/delete/{id}', 'ProviderProductsController@delete')->where('id', '[0-9]+')->name('provider-product/delete');
+    Route::post('/provider-products/search', 'ProviderProductsController@search')->name('provider-products/search');
 
     // Возможные операции
     Route::get('/permissions', 'PermissionController@index')->name('permissions');

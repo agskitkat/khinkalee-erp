@@ -10,7 +10,7 @@
     @endif
 
     <div class="row">
-        <form action="{{ route('provider/save') }}" method="post" class="col-lg-6">
+        <form action="{{ route('provider-product/save') }}" method="post" class="col-lg-6">
             @csrf
             <input type="hidden"name="id">
             <div class="form-group">
@@ -41,13 +41,20 @@
                        placeholder="Поставщик">
             </div>
             <div class="form-group">
+                <label>Вес еденицы в кг, если 0 то заказать можно только еденицами измерений</label>
+                <input type="number"
+                       value="{{$product->mass}}"
+                       class="form-control"
+                       name="mass"
+                       placeholder="Вес в кг">
+            </div>
+            <div class="form-group">
                 <label>Еденица измерения</label>
                 <input type="text"
                        value="{{$product->measure}}"
                        class="form-control"
                        name="measure"
-                       placeholder="Артикул">
-                <small id="emailHelp" class="form-text text-muted">Уникальная связь между товаром поставщика и базой данных</small>
+                       placeholder="Еденица измерения">
             </div>
             <div class="form-group">
                 <label>Цена за еденицу измерения в рублях</label>

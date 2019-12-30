@@ -25,7 +25,7 @@ class CreateProvidersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('providers_id')->unsigned();
             $table->foreign('providers_id')->references('id')->on('providers')->onDelete('cascade');
-            $table->string('article', 255)->unique();
+            $table->string('article')->unique();
             $table->text('name');
             $table->string('measure', 255);
             $table->integer('divider');
@@ -42,6 +42,7 @@ class CreateProvidersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('provider_goods');
         Schema::dropIfExists('providers');
     }
 }

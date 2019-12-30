@@ -19,6 +19,17 @@ class Product extends Model
     }
 
     function getStrong() {
-        return "TODO";
+        $result = [
+            'id' => '0',
+            'name' => ''
+        ];
+
+        if($this->strong_rel) {
+            $good = ProviderProducts::find($this->strong_rel);
+            $result['id'] = $good->id;
+            $result['name'] = $good->getProviderName() . " - " . $good->name;
+        }
+
+        return $result;
     }
 }

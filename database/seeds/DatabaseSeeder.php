@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Филиал
-        $filialId = DB::table('users')->insertGetId([
+        $filialId = DB::table('filials')->insertGetId([
             'name' => "Khinka Lee",
             'address' => 'Никитский бул. 25',
         ]);

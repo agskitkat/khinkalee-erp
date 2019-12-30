@@ -33,7 +33,7 @@
                         <tr>
                             <th>{{ $product->id }}</th>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->getStrong() }}</td>
+                            <td>{{ $product->getStrong()['name'] }}</td>
                             <td>
                                 <a href="{{ route('product/delete', ['id'=>$product->id]) }}">Удалить</a>
                                 <a href="{{ route('product/edit', ['id'=>$product->id]) }}">Редактировать</a>
@@ -60,7 +60,7 @@
                     <tr>
                         <th>{{ $product->id }}</th>
                         <td>{{ $product->name }}</td>
-                        <td>{{ $product->getStrong() }}</td>
+                        <td>{{ $product->getStrong()['name'] }}</td>
                         <td>
                             <a href="{{ route('product/delete', ['id'=>$product->id]) }}">Удалить</a>
                             <a href="{{ route('product/edit', ['id'=>$product->id]) }}">Редактировать</a>

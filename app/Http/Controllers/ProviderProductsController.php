@@ -59,7 +59,13 @@ class ProviderProductsController extends Controller
         }
 
         $product->name = $request->name;
-        $product->email = $request->email;
+        $product->article = $request->article;
+        $product->providers_id = $request->providers_id;
+        $product->price = $request->price;
+        $product->measure = $request->measure;
+        $product->mass = $request->mass;
+        $product->divider = $request->divider;
+
         $product->save();
 
         if( $isNew ) {
@@ -83,5 +89,20 @@ class ProviderProductsController extends Controller
         }
         $product->delete();
         return redirect()->route('provider-products');
+    }
+
+    function search(Request $request) {
+        $string = $request->string;
+        $list = ProviderProducts::where('name', 'like', '%' .$string . '%')->take(10)->get('id');
+        $result = [];
+        foreach($list as $item) {
+            $item = ProviderProducts::find($item['id']);
+            $provider = $item->getProviderName();
+            $result[] = [
+               'id' => $item->id,
+               'name' => $provider . ' - ' .  $item->name
+            ];
+        }
+        return response()->json($result);
     }
 }
