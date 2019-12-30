@@ -34,7 +34,7 @@
                 <label>Правила обработки Excel в формате JSON</label>
                 <textarea rows="15" class="form-control" name="excel_rules">{{$provider->excel_rules}}</textarea>
                 <br><br><h4>Блок sittings</h4>
-
+                <p><b>debug</b> -  дебажим <code>,"debug":"true"</code></p>
                 <p><b>offsetRows</b> - Сколько строк отступить сверху, допустим убрать хедер таблицы</p>
                 <p><b>goodRowCountParam</b> - Количество заполненых колонок в строке, определяющих валидную строку. </p>
 

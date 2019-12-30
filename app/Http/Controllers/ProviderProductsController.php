@@ -93,7 +93,7 @@ class ProviderProductsController extends Controller
 
     function search(Request $request) {
         $string = $request->string;
-        $list = ProviderProducts::where('name', 'like', '%' .$string . '%')->take(10)->get('id');
+        $list = ProviderProducts::where('name', 'like', '%' .$string . '%')->take(30)->get('id');
         $result = [];
         foreach($list as $item) {
             $item = ProviderProducts::find($item['id']);

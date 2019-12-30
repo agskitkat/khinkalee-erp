@@ -29,7 +29,7 @@ class CreateProvidersTable extends Migration
             $table->text('name');
             $table->string('measure', 255);
             $table->integer('divider');
-            $table->bigInteger('mass');
+            $table->float('mass');
             $table->float('price');
             $table->timestamps();
         });

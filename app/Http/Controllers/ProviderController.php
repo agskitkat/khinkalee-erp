@@ -162,11 +162,14 @@ class ProviderController extends Controller
 
 
     protected function parceRow($row, $rules, $provider_id) {
+        $debug = isset($rules->sittings->debug)?true:false;
 
-        /*echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-        exit();*/
+        if($debug) {
+            echo "<pre>";
+            print_r($row);
+            echo "</pre>";
+        }
+
 
         // Получаем данные по правилам
         $article = trim($this->research($row, $rules, 'article'));
@@ -175,17 +178,6 @@ class ProviderController extends Controller
         $measure = $this->research($row, $rules,'measure');
         $mass    = $this->research($row, $rules,'mass');
 
-        $result = [
-            "article" => $article,
-            "price" => $price,
-            "name" => $name,
-            "measure" => trim($measure),
-
-            /*
-            "mass" => $mass,
-            "divider" => $divider
-            */
-        ];
 
         /*echo "<pre>";
         print_r($result);
@@ -202,6 +194,8 @@ class ProviderController extends Controller
             $good = new ProviderProducts;
         }
 
+
+
         $good->providers_id = $provider_id;
         $good->article = $article;
         $good->price = $price;
@@ -209,7 +203,10 @@ class ProviderController extends Controller
         $good->measure = $measure;
         $good->mass = $mass;
         $good->divider = 1;
-        $good->save();
+
+        if(!$debug) {
+            $good->save();
+        }
 
         return $good;
     }
