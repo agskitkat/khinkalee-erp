@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fed682af-189d-4b86-abe4-74c689965744" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/SearchProviderProductComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProviderProductsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProviderProductsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProviderProducts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProviderProducts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_17_095457_create_products_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_17_095457_create_products_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_18_192129_create_roles_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_18_192129_create_roles_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_23_073121_create_providers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_23_073121_create_providers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_23_114752_create_permissions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_23_114752_create_permissions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/product/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/product/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/product/list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/product/list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/provider/product/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/provider/product/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -210,7 +196,7 @@
       <workItem from="1576609560391" duration="612000" />
       <workItem from="1576610183570" duration="3329000" />
       <workItem from="1577086186612" duration="8483000" />
-      <workItem from="1577517696049" duration="11047000" />
+      <workItem from="1577517696049" duration="12397000" />
     </task>
     <servers />
   </component>

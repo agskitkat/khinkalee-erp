@@ -26,8 +26,13 @@ class Product extends Model
 
         if($this->strong_rel) {
             $good = ProviderProducts::find($this->strong_rel);
-            $result['id'] = $good->id;
-            $result['name'] = $good->getProviderName() . " - " . $good->name;
+            if(!$good) {
+                $result['id'] = 0;
+                $result['name'] = "Товар поставщика удалён";
+            } else {
+                $result['id'] = $good->id;
+                $result['name'] = $good->getProviderName() . " - " . $good->name;
+            }
         }
 
         return $result;
