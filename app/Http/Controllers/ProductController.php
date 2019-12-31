@@ -19,7 +19,12 @@ class ProductController extends Controller
         ]);
     }
 
-
+    /**
+     * Форма редактирования
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function edit($id = false)
     {
         $this->authorize('viewAny', Product::class);
