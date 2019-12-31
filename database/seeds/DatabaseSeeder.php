@@ -19,6 +19,48 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //
+      /*
+      {
+            "sittings":{
+            "offsetRows" :"12",
+            "goodRowCountParam":"5"
+            },
+            "article":{
+                        "pos":"1",
+            "sprintf":"%05d"
+            },
+            "name":{
+                        "pos":"3"
+            },
+            "price": {
+                        "pos":"8"
+            },
+            "measure":{
+                        "pos":"7"
+            },
+            "mass":{
+                        "recursive":[
+                            "checkMass",
+                            "findMassByName"
+                        ]
+            },
+            "checkMass":{
+                        "expression":"IsSetMass",
+            "ismass":"true",
+            "pos":"6"
+            },
+            "IsSetMass": {
+                        "pos":"7",
+            "regexp":"/^(кг)$/u"
+            },
+            "findMassByName":{
+                        "ismass":"true",
+            "pos":"3",
+            "regexp":"/(\\d+(,|\\.)?\\d+)\\s?(г|гр|кг)/u",
+            "default":"1"
+            }
+       }
+      */
 
         // Пользователи и роли
         $userId = DB::table('users')->insertGetId([

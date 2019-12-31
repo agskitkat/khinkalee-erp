@@ -12,7 +12,7 @@
     <div class="row">
         <form action="{{ route('provider-product/save') }}" method="post" class="col-lg-6">
             @csrf
-            <input type="hidden"name="id">
+            <input type="hidden" name="id">
             <div class="form-group">
                 <label>Продукт поставщика</label>
                 <input maxlength="255"
@@ -22,7 +22,6 @@
                        name="name"
                        placeholder="Название">
             </div>
-
             <div class="form-group">
                 <label>Уникалный код проукта(артикул)</label>
                 <input type="text"
@@ -31,7 +30,6 @@
                        name="article"
                        placeholder="Артикул">
             </div>
-
             <div class="form-group">
                 <label>Поставщик</label>
                 <input type="number"
@@ -73,8 +71,6 @@
                        placeholder="Делитель">
                 <small id="emailHelp" class="form-text text-muted">Если указать 1 - только целой единицей товара, если 2 - можно по полоыине единицы.</small>
             </div>
-
-
 
             @if(!$product->id)
                 <button type="submit" class="btn btn-primary">Создать</button>
