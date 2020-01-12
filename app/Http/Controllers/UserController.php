@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Filial;
+use App\GroupRole;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         $list = User::all();
         return view('user.list', compact('list', 'list'));
     }
@@ -27,6 +30,7 @@ class UserController extends Controller
      */
     public function edit($id = false)
     {
+        $this->authorize('viewAny', User::class);
         if($id) {
             $user = User::where('id', $id)->first();
             if(!$user ) {
@@ -36,7 +40,10 @@ class UserController extends Controller
             $user  = new User();
         }
 
-        return view('user.edit', compact('user', 'user'));
+        $roles = Role::all();
+        $userRoles = $user->getRoles();
+
+        return view('user.edit',  ['user' => $user, 'roles' => $roles, 'userRoles' => $userRoles]);
     }
 
 
@@ -52,16 +59,26 @@ class UserController extends Controller
 
         if($request->id) {
             $user = User::find($request->id);
+            $this->authorize('update',  $user);
         }
 
         if(!$user) {
             $isNew = true;
             $user = new User();
+            $this->authorize('create', $user);
         }
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
+
+        $arRoles = [];
+        if($request->roles) {
+            foreach ($request->roles as $role) {
+                $arRoles[] = +$role;
+            }
+        }
+        $user->setRole($arRoles);
 
         if( $isNew ) {
             flash('Создано !')->success()->important();
@@ -79,6 +96,7 @@ class UserController extends Controller
      */
     public function delete($id) {
         $user = User::find($id);
+        $this->authorize('delete',  $user);
         if(!$user) {
             return abort(404);
         }

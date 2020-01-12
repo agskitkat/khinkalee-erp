@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fed682af-189d-4b86-abe4-74c689965744" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_12_22_151540_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="SCSS File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -120,6 +120,7 @@
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
+      <path value="$PROJECT_DIR$/vendor/dlnsk/h-rbac" />
     </include_path>
   </component>
   <component name="ProjectId" id="1V6XBrNDyiGRLkk5pFlSZ3VnrLQ" />
@@ -130,17 +131,18 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/role" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\role" />
-      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\user" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\app\Http\Controllers" />
-      <recent name="D:\OpenServer\OSPanel\domains\khinkalee-erp\resources\lang\ru" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\product\group" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\product" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\provider" />
+      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\role" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -193,7 +195,8 @@
       <workItem from="1576600881402" duration="2432000" />
       <workItem from="1576609560391" duration="612000" />
       <workItem from="1576610183570" duration="3329000" />
-      <workItem from="1577027697727" duration="656000" />
+      <workItem from="1577086186612" duration="8483000" />
+      <workItem from="1577517696049" duration="12397000" />
     </task>
     <servers />
   </component>

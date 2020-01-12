@@ -13,13 +13,23 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('ID_T_PRODUCT_GROUP');
-            $table->string('NAME');
-            $table->string("STRONG_REL");
+            $table->text('name');
+            $table->string('sort');
             $table->timestamps();
         });
+
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('id_product_group')->unsigned()->nullable();
+            $table->foreign('id_product_group')->references('id')->on('product_groups')->onDelete('set null');
+            $table->string('name');
+            $table->string("strong_rel")->nullable();
+            $table->timestamps();
+        });
+
+
     }
 
     /**
@@ -30,5 +40,6 @@ class CreateProductsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+        Schema::dropIfExists('product_groups');
     }
 }

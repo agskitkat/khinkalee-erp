@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function index() {
         $list = Role::all();
-        return view('role.list', compact('list', 'list'));
+        return view('role.list', compact('list'));
     }
 
     /**
@@ -23,8 +23,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function edit($id = false)
-    {
+    public function edit($id = false) {
         if($id) {
             $role = Role::where('id', $id)->first();
             if(!$role) {
@@ -34,7 +33,10 @@ class RoleController extends Controller
             $role = new Role();
         }
 
-        return view('role.edit', compact('role', 'role'));
+        $allPermissions = Permission::all();
+        $permissions = $role->permissions();
+
+        return view('role.edit', ['permissions' => $permissions, 'role' => $role, 'permissionsList'=> $allPermissions]);
     }
 
 
@@ -60,6 +62,15 @@ class RoleController extends Controller
         $role->name = $request->name;
         $role->code = $request->code;
         $role->save();
+
+
+        $arPermissions = [];
+        if($request->permissions) {
+            foreach ($request->permissions as $permission) {
+                $arPermissions[] = +$permission;
+            }
+        }
+        $role->setPermission($arPermissions);
 
         if( $isNew ) {
             flash('Создано !')->success()->important();
