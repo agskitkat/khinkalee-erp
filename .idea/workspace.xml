@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fed682af-189d-4b86-abe4-74c689965744" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Policies/OrderPolicy.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/table-input-group/SearchgoodComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/table-input-group/TableInputComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/order/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/order/list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProviderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProviderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Order.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ProductGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProductGroup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_18_052100_create_filials_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_18_052100_create_filials_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_22_151540_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_22_151540_create_orders_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_23_114752_create_permissions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_23_114752_create_permissions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -131,18 +147,18 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/order" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\OpenServer\OSPanel\domains\khinkalee-erp\resources\views\order" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\app\Http\Controllers" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\product\group" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\product" />
       <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\provider" />
-      <recent name="D:\OPENSERVER\OSPanel\domains\khinkalee-erp\resources\views\role" />
     </key>
   </component>
   <component name="RunDashboard">

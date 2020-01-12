@@ -101,4 +101,19 @@ class ProductController extends Controller
     }
 
 
+    function search(Request $request) {
+        $string = $request->string;
+        $list = Product::where('name', 'like', '%' .$string . '%')->take(30)->get('id');
+        $result = [];
+
+        foreach($list as $item) {
+            $item = Product::find($item['id']);
+            $result[] = [
+                'id' => $item->id,
+                'name' => $item->name
+            ];
+        }
+
+        return response()->json($result);
+    }
 }

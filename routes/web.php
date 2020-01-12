@@ -66,10 +66,17 @@ Route::group(['middleware' => 'checkauth'], function() {
     Route::get('/product/edit/{id?}', 'ProductController@edit')->where('id', '[0-9]+')->name('product/edit');
     Route::post('/product/save', 'ProductController@save')->name('product/save');
     Route::get('/product/delete/{id}', 'ProductController@delete')->where('id', '[0-9]+')->name('product/delete');
+    Route::post('/product/search', 'ProductController@search')->name('product/search');
 
     // Роутер групп продуктов
     Route::get('/group', 'ProductGroupController@index')->name('groups');
     Route::get('/group/edit/{id?}', 'ProductGroupController@edit')->where('id', '[0-9]+')->name('group/edit');
     Route::post('/group/save', 'ProductGroupController@save')->name('group/save');
     Route::get('/group/delete/{id}', 'ProductGroupController@delete')->where('id', '[0-9]+')->name('group/delete');
+
+    // Роутер для ордеров
+    Route::get('/orders', 'OrderController@index')->name('orders');
+    Route::get('/order/edit/{id?}', 'OrderController@edit')->where('id', '[0-9]+')->name('order/edit');
+    Route::post('/order/save', 'OrderController@save')->name('order/save');
+    Route::get('/order/delete/{id}', 'OrderController@delete')->where('id', '[0-9]+')->name('order/delete');
 });

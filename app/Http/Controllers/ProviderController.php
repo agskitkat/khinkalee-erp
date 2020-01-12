@@ -126,7 +126,7 @@ class ProviderController extends Controller
 
         // https://github.com/shuchkin/simplexlsx
         if ( !$xlsx = SimpleXLSX::parse($file->getPathname()) ) {
-            flash(SimpleXLSX::parseError())->error()->important();
+            flash(/*SimpleXLSX::parseError()*/)->error()->important();
             return redirect()->route('providers/excel', ['id'=> $provider->id]);
         }
 
@@ -141,13 +141,19 @@ class ProviderController extends Controller
         $table = $xlsx->rows();
         $products = [];
         if($table) {
-            if(isset($obrules->sittings->offsetRows)) {
-                $table = array_slice($table, intval($obrules->sittings->offsetRows));
-            }
-            foreach ($table as $row) {
-                if($this->checkGoodRow($row, $obrules->sittings)) {
-                    $products[] = $this->parceRow($row, $obrules, $provider->id);
+            try {
+                if(isset($obrules->sittings->offsetRows)) {
+                    $table = array_slice($table, intval($obrules->sittings->offsetRows));
                 }
+                foreach ($table as $row) {
+                    if($this->checkGoodRow($row, $obrules->sittings)) {
+                        $products[] = $this->parceRow($row, $obrules, $provider->id);
+                    }
+                }
+            } catch (Exception $e) {
+
+                flash("Ошибка в правиле обработки: " . $provider->excel_rules)->error()->important();
+                return redirect()->route('providers/excel', ['id'=> $provider->id]);
             }
         } else {
             flash("Таблица пуста")->warning()->important();

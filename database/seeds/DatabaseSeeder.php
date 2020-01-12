@@ -62,6 +62,52 @@ class DatabaseSeeder extends Seeder
        }
       */
 
+       // Поставщик
+        $userId = DB::table('providers')->insertGetId([
+            'email' => "agskitkat@gmail.com",
+            'name' => 'Фрут Сити',
+            'excel_rules' => '{ 
+"sittings":{ 
+"offsetRows":"12",
+"goodRowCountParam":"5"
+},
+"article":{ 
+"pos":"1",
+"sprintf":"%05d"
+},
+"name":{ 
+"pos":"3"
+},
+"price":{ 
+"pos":"8"
+},
+"measure":{ 
+"pos":"7"
+},
+"mass":{ 
+"recursive":[ 
+"checkMass",
+"findMassByName"
+]
+},
+"checkMass":{ 
+"expression":"IsSetMass",
+"ismass":"true",
+"pos":"6"
+},
+"IsSetMass":{ 
+"pos":"7",
+"regexp":"/^(кг)$/u"
+},
+"findMassByName":{ 
+"ismass":"true",
+"pos":"3",
+"regexp":"/(\\d+(,|\\.)?\\d+)\\s?(г|гр|кг)/u",
+"default":"1"
+}
+}',
+        ]);
+
         // Пользователи и роли
         $userId = DB::table('users')->insertGetId([
             'name' => "Georgy",
@@ -90,6 +136,30 @@ class DatabaseSeeder extends Seeder
             'user_id' => $userId,
             'role_id' => $roleId
         ]);
+
+
+        // Товары и группы
+        $Product_group_Id = DB::table('product_groups')->insertGetId([
+            'name' => "Мясо",
+            'sort' => '1'
+        ]);
+        $arProductName = [
+            'Баранья мякоть',
+            'Говяжий жир',
+            'Говяжья вырезка',
+            'Говяжья мякоть',
+            'Свиная мякоть',
+            'Свиная шейка',
+            'Телятина мякоть'
+        ];
+
+        foreach ($arProductName as $name ) {
+            DB::table('products')->insertGetId([
+                'name' => $name,
+                'id_product_group' => $Product_group_Id
+            ]);
+        }
+
 
         // Операции филиалов
         DB::table('permissions')->insert([
