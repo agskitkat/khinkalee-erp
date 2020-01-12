@@ -12,3 +12,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 .idea/workspace.xml
+.idea/khinkalee.iml
+.idea/php.xml
+.idea/workspace.xml
