@@ -213,6 +213,25 @@ class DatabaseSeeder extends Seeder
             'code' => 'user_remove_self'
         ]);
 
+        // Операции с ролями
+        DB::table('permissions')->insert([
+            'name' => "Роли: чтение",
+            'code' => 'role_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Роли: создание",
+            'code' => 'role_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Роли: изменение",
+            'code' => 'role_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Роли: удаление",
+            'code' => 'role_remove'
+        ]);
+
+
         // Операции с используемыми товарами
         DB::table('permissions')->insert([
             'name' => "Продукт: чтение",
@@ -264,5 +283,67 @@ class DatabaseSeeder extends Seeder
             'name' => "Группа продукта: удаление только себя",
             'code' => 'group_remove_self'
         ]);
+
+
+
+        // Операции с ЗАКАЗАМИ
+        DB::table('permissions')->insert([
+            'name' => "Заказ: чтение только себя",
+            'code' => 'order_read_self'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: чтение",
+            'code' => 'order_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: создание",
+            'code' => 'order_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: изменение всех",
+            'code' => 'order_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: изменение только себя",
+            'code' => 'order_self_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: удаление",
+            'code' => 'order_remove'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Заказ: удаление только себя",
+            'code' => 'order_remove_self'
+        ]);
+
+
+        // Операции с операциями ))
+        DB::table('permissions')->insert([
+            'name' => "Операции: чтение",
+            'code' => 'permission_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Операции: создание",
+            'code' => 'permission_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Операции: изменение всех",
+            'code' => 'permission_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Операции: изменение только себя",
+            'code' => 'permission_update_self'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Операции: удаление",
+            'code' => 'permission_remove'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Операции: удаление только себя",
+            'code' => 'permission_remove_self'
+        ]);
+
+
+
     }
 }

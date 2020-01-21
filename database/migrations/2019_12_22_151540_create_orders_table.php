@@ -17,6 +17,10 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('status');
+
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+
             $table->text('comment')->nullable();
             $table->timestamps();
         });

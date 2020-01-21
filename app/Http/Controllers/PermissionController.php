@@ -14,6 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Permission::class);
+
         $list = Permission::all();
         return view('permission.list', compact('list', 'list'));
     }
@@ -25,6 +27,7 @@ class PermissionController extends Controller
      */
     public function edit($id = false)
     {
+        $this->authorize('viewAny', Permission::class);
         if($id) {
             $permission = Permission::where('id', $id)->first();
             if(!$permission) {
@@ -50,11 +53,13 @@ class PermissionController extends Controller
 
         if($request->id) {
             $permission = Permission::find($request->id);
+            $this->authorize('update',  $permission);
         }
 
         if(!$permission) {
             $isNew = true;
             $permission = new Permission();
+            $this->authorize('create', $permission);
         }
 
         $permission->name = $request->name;
@@ -77,6 +82,7 @@ class PermissionController extends Controller
      */
     public function delete($id) {
         $permission = Permission::find($id);
+        $this->authorize('delete',  $permission);
         if(!$permission) {
             return abort(404);
         }

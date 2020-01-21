@@ -13,16 +13,15 @@ class OrderController extends Controller
     //
     public function index() {
         $this->authorize('viewAny', Order::class);
+
         $orders = Order::orderBy('updated_at', 'asc')->get();
         return view('order.list', [
             'list' => $orders
         ]);
     }
 
-
     /**
      * Форма редактирования
-     *
      * @return \Illuminate\Contracts\Support\Renderable
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -65,7 +64,6 @@ class OrderController extends Controller
             'arOrderProductState' => $arOrderProductState
         ]);
     }
-
 
     /**
      * Сохранить
@@ -114,6 +112,9 @@ class OrderController extends Controller
 
     /**
      *  Установить статус на проверке
+     * @param bool $id
+     * @return \Illuminate\Http\RedirectResponse|void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function orderFillingEnd($id = false) {
         $order = false;

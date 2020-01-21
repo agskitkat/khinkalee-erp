@@ -33,11 +33,6 @@ class OrderPolicy
         //
     }
 
-
-    public function viewSelf(User $user) {
-
-    }
-
     /**
      * Determine whether the user can create odel: orders.
      *
@@ -61,7 +56,7 @@ class OrderPolicy
         if( $user->hasPermissions(['order_update'])) {
             return true;
         } else {
-            return $user->hasPermissions(['order_self'], $order);
+            return $user->hasPermissions(['order_update_self'], $order);
         }
     }
 
@@ -74,10 +69,10 @@ class OrderPolicy
      */
     public function delete(User $user,  Order $order)
     {
-        if( $user->hasPermissions(['delete_remove'])) {
+        if( $user->hasPermissions(['order_remove'])) {
             return true;
         } else {
-            return $user->hasPermissions(['delete_remove_self'], $order);
+            return $user->hasPermissions(['order_remove_self'], $order);
         }
     }
 

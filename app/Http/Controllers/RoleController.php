@@ -14,6 +14,7 @@ class RoleController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
+        $this->authorize('viewAny', Role::class);
         $list = Role::all();
         return view('role.list', compact('list'));
     }
@@ -24,6 +25,7 @@ class RoleController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function edit($id = false) {
+        $this->authorize('viewAny', Role::class);
         if($id) {
             $role = Role::where('id', $id)->first();
             if(!$role) {
@@ -52,11 +54,13 @@ class RoleController extends Controller
 
         if($request->id) {
             $role = Role::find($request->id);
+            $this->authorize('update',  $role);
         }
 
         if(!$role) {
             $isNew = true;
             $role = new Role();
+            $this->authorize('create',  $role);
         }
 
         $role->name = $request->name;
@@ -88,6 +92,7 @@ class RoleController extends Controller
      */
     public function delete($id) {
         $role = Role::find($id);
+        $this->authorize('remove',  $role);
         if(!$role) {
             return abort(404);
         }
