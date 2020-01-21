@@ -111,4 +111,26 @@ class OrderController extends Controller
 
         return redirect()->route('order/edit',  ['id' => $order->id]);
     }
+
+    /**
+     *  Установить статус на проверке
+     */
+    public function orderFillingEnd($id = false) {
+        $order = false;
+
+        if($id) {
+            $order = Order::where('id', $id)->first();
+        }
+
+        if(!$order) {
+            return abort(404);
+        }
+
+        $this->authorize('update',  $order);
+
+        $order->status = "check";
+        $order->save();
+
+        return redirect()->route('orders');
+    }
 }

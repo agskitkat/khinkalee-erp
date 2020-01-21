@@ -77,6 +77,7 @@ Route::group(['middleware' => 'checkauth'], function() {
     // Роутер для ордеров
     Route::get('/orders', 'OrderController@index')->name('orders');
     Route::get('/order/edit/{id?}', 'OrderController@edit')->where('id', '[0-9]+')->name('order/edit');
+    Route::get('/order/filling-end/{id?}', 'OrderController@orderFillingEnd')->where('id', '[0-9]+')->name('order/filling-end');
     Route::post('/order/save', 'OrderController@save')->name('order/save');
     Route::get('/order/delete/{id}', 'OrderController@delete')->where('id', '[0-9]+')->name('order/delete');
 });

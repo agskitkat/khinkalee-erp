@@ -14,10 +14,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Дата</th>
+                <th scope="col">Статус</th>
                 <th scope="col">Филиал</th>
                 <th scope="col">Пользователь</th>
-                <th scope="col">В заказе продуктов</th>
-                <th scope="col">Сумма</th>
+                <th scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -25,9 +25,10 @@
                 <tr>
                     <th>{{ $order->id }}</th>
                     <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->status }}</td>
                     <td>{{ $order->getFilial() }}</td>
                     <td>{{ $order->getUser() }}</td>
-                    <td>{{ $order->getProductsCount() }}</td>
+
                     <td>
                         <a href="{{ route('order/delete', ['id'=>$order->id]) }}">Удалить</a>
                         <a href="{{ route('order/edit', ['id'=>$order->id]) }}">Редактировать</a>

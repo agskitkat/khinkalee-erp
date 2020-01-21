@@ -28,8 +28,7 @@
                        value="{{$order->comment}}"
                        class="form-control"
                        name="code"
-                        placeholder="Комментарий">
-
+                       placeholder="Комментарий">
                 </textarea>
             </div>
 
@@ -114,6 +113,7 @@
             @else
                 <input type="hidden" name="id" value="{{$order->id}}">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
+                <a type="submit" href="{{ route('order/filling-end', ['id'=>$order->id]) }}" class="btn btn-success">Отправить закза</a>
             @endif
         </form>
     </div>
