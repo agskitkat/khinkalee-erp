@@ -53,4 +53,45 @@ class OrderController extends Controller
             'outOfGroup' => $outOfGroup ?:[]
         ]);
     }
+
+
+    /**
+     * Сохранить
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function save(Request $request)
+    {
+        $isNew = false;
+        $order = false;
+
+        if($request->id) {
+            $order = Order::find($request->id);
+            $this->authorize('update',  $order);
+        }
+
+        if(!$order) {
+            $isNew = true;
+            $order = new Order();
+            $this->authorize('create', $order);
+        }
+
+        foreach($request->product as $product) {
+            print_r($product);
+        }
+
+        $order->name = $request->name;
+        $order->status = $request->status?:"filling";
+        $order->comment = $request->comment;
+        $order->save();
+
+        if( $isNew ) {
+            flash('Создано !')->success()->important();
+        } else {
+            flash('Обновлено !')->success()->important();
+        }
+
+        //return redirect()->route('order/edit',  ['id' => $order->id]);
+    }
 }

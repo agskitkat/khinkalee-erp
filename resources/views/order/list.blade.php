@@ -27,8 +27,8 @@
                     <td>{{ $order->getUser() }}</td>
                     <td>{{ $order->getSum() }}</td>
                     <td>
-                        <a href="{{ route('role/delete', ['id'=>$order->id]) }}">Удалить</a>
-                        <a href="{{ route('role/edit', ['id'=>$order->id]) }}">Редактировать</a>
+                        <a href="{{ route('order/delete', ['id'=>$order->id]) }}">Удалить</a>
+                        <a href="{{ route('order/edit', ['id'=>$order->id]) }}">Редактировать</a>
                     </td>
                 </tr>
             @endforeach

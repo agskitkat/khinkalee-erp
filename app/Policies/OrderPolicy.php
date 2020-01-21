@@ -18,7 +18,7 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasPermissions(['order_read']);
     }
 
     /**
@@ -46,7 +46,7 @@ class OrderPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->hasPermissions(['order_create']);
     }
 
     /**
@@ -58,7 +58,11 @@ class OrderPolicy
      */
     public function update(User $user,  Order $order)
     {
-        //
+        if( $user->hasPermissions(['order_update'])) {
+            return true;
+        } else {
+            return $user->hasPermissions(['order_self'], $order);
+        }
     }
 
     /**
@@ -70,7 +74,11 @@ class OrderPolicy
      */
     public function delete(User $user,  Order $order)
     {
-        //
+        if( $user->hasPermissions(['delete_remove'])) {
+            return true;
+        } else {
+            return $user->hasPermissions(['delete_remove_self'], $order);
+        }
     }
 
     /**

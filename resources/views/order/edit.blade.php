@@ -6,7 +6,7 @@
     @if(!$order->id)
         <h1>Создать закупку</h1>
     @else
-        <h1>Закупка: {{$order->id}} от </h1>
+        <h1>Закупка: №{{$order->id}} от {{$order->created_at}}</h1>
     @endif
 
     <div class="row">

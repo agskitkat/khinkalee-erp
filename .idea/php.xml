@@ -86,6 +86,7 @@
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/laracasts/flash" />
       <path value="$PROJECT_DIR$/vendor/dlnsk/h-rbac" />
+      <path value="$PROJECT_DIR$/vendor/shuchkin/simplexlsx" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
