@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public $inOrder = [];
+
     protected $fillable = [
         'id_product_group', 'name', 'strong_rel'
     ];

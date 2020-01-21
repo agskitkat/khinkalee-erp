@@ -53,12 +53,26 @@
                             <tr>
                                 <td>{{ $product->name }}</td>
                                 <td>
-                                    <input class="form-control" name="product[{{ $product->id }}][count]" type="number" min="0">
+                                    @if( isset($arOrderProductState[$product->id]) )
+                                        <input class="form-control" value="{{ $arOrderProductState[$product->id]['count'] }}" name="product[{{ $product->id }}][count]" type="number" min="0">
+                                    @else
+                                        <input class="form-control" name="product[{{ $product->id }}][count]" type="number" min="0">
+                                    @endif
                                 </td>
                                 <td>
                                     <select class="form-control" name="product[{{ $product->id }}][measure]">
-                                        <option value="mass">кг.</option>
-                                        <option value="item">шт.</option>
+                                        @if( isset($arOrderProductState[$product->id]) )
+                                            @if( $arOrderProductState[$product->id]['measure'] === "mass" )
+                                                <option value="mass" selected>кг.</option>
+                                                <option value="item">шт.</option>
+                                            @else
+                                                <option value="mass">кг.</option>
+                                                <option value="item" selected>шт.</option>
+                                            @endif
+                                        @else
+                                            <option value="mass">кг.</option>
+                                            <option value="item">шт.</option>
+                                        @endif
                                     </select>
                                 </td>
                             </tr>

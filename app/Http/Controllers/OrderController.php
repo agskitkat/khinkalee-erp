@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderProduct;
 use App\Product;
 use App\ProductGroup;
 use Illuminate\Http\Request;
@@ -36,12 +37,22 @@ class OrderController extends Controller
             $order  = new Order();
         }
 
+        $orderProductState = $order->getProducts();
         $groups = ProductGroup::orderBy('sort', 'asc')->get();
         $outOfGroup = Product::where('id_product_group', NULL)->get();
+
+        $arOrderProductState = [];
+        foreach($orderProductState as $p) {
+            $arOrderProductState[$p->id_product] = [
+                "measure" => $p->measure,
+                "count" => $p->count,
+            ];
+        }
 
         foreach($groups as &$group) {
             if(count($products = $group->getProducts())) {
                 foreach($products as $product) {
+
                     $group->products[] = $product;
                 }
             }
@@ -50,7 +61,8 @@ class OrderController extends Controller
         return view('order.edit',  [
             'order' => $order,
             'groups' => $groups,
-            'outOfGroup' => $outOfGroup ?:[]
+            'outOfGroup' => $outOfGroup ?:[],
+            'arOrderProductState' => $arOrderProductState
         ]);
     }
 
@@ -77,14 +89,19 @@ class OrderController extends Controller
             $this->authorize('create', $order);
         }
 
-        foreach($request->product as $product) {
-            print_r($product);
-        }
 
         $order->name = $request->name;
         $order->status = $request->status?:"filling";
         $order->comment = $request->comment;
         $order->save();
+
+        foreach($request->product as $id => $product) {
+            if($product['count'] === 0 || empty($product['count'])) {
+                $order->unsetProduct($id);
+            } else {
+                $order->setProduct($id, $product['measure'], $product['count']);
+            }
+        }
 
         if( $isNew ) {
             flash('Создано !')->success()->important();
@@ -92,6 +109,6 @@ class OrderController extends Controller
             flash('Обновлено !')->success()->important();
         }
 
-        //return redirect()->route('order/edit',  ['id' => $order->id]);
+        return redirect()->route('order/edit',  ['id' => $order->id]);
     }
 }
