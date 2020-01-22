@@ -18,7 +18,7 @@ class OrderPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasPermissions(['order_read']);
+        return $user->hasPermissions(['order_read', 'order_read_self']);
     }
 
     /**
@@ -56,7 +56,7 @@ class OrderPolicy
         if( $user->hasPermissions(['order_update'])) {
             return true;
         } else {
-            return $user->hasPermissions(['order_update_self'], $order);
+            return $user->hasPermissions(['order_self_update'], $order);
         }
     }
 

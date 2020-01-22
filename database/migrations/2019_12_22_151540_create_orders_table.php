@@ -35,6 +35,8 @@ class CreateOrdersTable extends Migration
 
             $table->string('measure');
             $table->float('count');
+
+            $table->timestamps();
         });
     }
 

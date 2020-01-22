@@ -71,7 +71,11 @@ class ProviderPolicy
      */
     public function delete(User $user, Provider $provider)
     {
-        //
+        if( $user->hasPermissions(['provider_remove'])) {
+            return true;
+        } else {
+            return $user->hasPermissions(['provider_remove_self'], $provider);
+        }
     }
 
     /**

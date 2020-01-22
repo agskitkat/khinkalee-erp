@@ -344,6 +344,49 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        // Операции с Поставщиками
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: чтение",
+            'code' => 'provider_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: создание",
+            'code' => 'provider_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: изменение всех",
+            'code' => 'provider_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: изменение только себя",
+            'code' => 'provider_update_self'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: удаление",
+            'code' => 'provider_remove'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Поставщик: удаление только себя",
+            'code' => 'provider_remove_self'
+        ]);
+        // Операции с товарами Поставщика
+        DB::table('permissions')->insert([
+            'name' => "Товар Поставщик: чтение",
+            'code' => 'provider_products_read'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Товар Поставщик: создание",
+            'code' => 'provider_products_create'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Товар Поставщик: изменение всех",
+            'code' => 'provider_products_update'
+        ]);
+        DB::table('permissions')->insert([
+            'name' => "Товар Поставщик: удаление",
+            'code' => 'provider_products_remove'
+        ]);
+
 
     }
 }

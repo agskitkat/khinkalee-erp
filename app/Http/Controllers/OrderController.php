@@ -7,14 +7,27 @@ use App\OrderProduct;
 use App\Product;
 use App\ProductGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     //
     public function index() {
-        $this->authorize('viewAny', Order::class);
+        //$this->authorize('viewAny', Order::class);
 
-        $orders = Order::orderBy('updated_at', 'asc')->get();
+        // Проверка пользователя на чтение своих записей !
+        $user = Auth::user();
+        if($user->hasPermissions(['order_read_self']) && !$user->hasRole('superadmin') ) {
+
+            $orders = Order::where('user_id', $user->id)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+
+        } else {
+            $this->authorize('viewAny', Order::class);
+            $orders = Order::orderBy('updated_at', 'asc')->get();
+        }
+
         return view('order.list', [
             'list' => $orders
         ]);
@@ -22,11 +35,12 @@ class OrderController extends Controller
 
     /**
      * Форма редактирования
+     * @param bool $id
      * @return \Illuminate\Contracts\Support\Renderable
-     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($id = false) {
-        $this->authorize('viewAny', Order::class);
+
+
         if($id) {
             $order = Order::where('id', $id)->first();
             if(!$order ) {
@@ -35,6 +49,8 @@ class OrderController extends Controller
         } else {
             $order  = new Order();
         }
+
+
 
         $orderProductState = $order->getProducts();
         $groups = ProductGroup::orderBy('sort', 'asc')->get();
@@ -51,7 +67,6 @@ class OrderController extends Controller
         foreach($groups as &$group) {
             if(count($products = $group->getProducts())) {
                 foreach($products as $product) {
-
                     $group->products[] = $product;
                 }
             }
@@ -76,15 +91,24 @@ class OrderController extends Controller
         $isNew = false;
         $order = false;
 
+        $user = Auth::user();
         if($request->id) {
-            $order = Order::find($request->id);
-            $this->authorize('update',  $order);
+            // Проверка на разрешения обновления
+            if($user->hasPermissions(['order_read_self']) && !$user->hasRole('superadmin') ) {
+                $order = Order::where('id', $request->id)
+                    ->where('user_id', $user->id)
+                    ->first();
+            } else {
+                $order = Order::find($request->id);
+                $this->authorize('update', $order);
+            }
         }
 
         if(!$order) {
             $isNew = true;
             $order = new Order();
             $this->authorize('create', $order);
+            $order->user_id = $user->id;
         }
 
 
@@ -119,15 +143,23 @@ class OrderController extends Controller
     public function orderFillingEnd($id = false) {
         $order = false;
 
+        $user = Auth::user();
+
+
         if($id) {
-            $order = Order::where('id', $id)->first();
+            if($user->hasPermission(['order_self_update'])) {
+                $order = Order::where('id', $id)
+                    ->where('user_id', $user->id)
+                    ->first();
+            } else {
+                $this->authorize('update',  $order);
+                $order = Order::where('id', $id)->first();
+            }
         }
 
         if(!$order) {
             return abort(404);
         }
-
-        $this->authorize('update',  $order);
 
         $order->status = "check";
         $order->save();

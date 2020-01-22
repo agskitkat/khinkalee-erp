@@ -84,36 +84,56 @@
             <div class="row">
                 <div class="col-lg-3 bg-dark">
                     <nav class=" bd-sidebar bg-dark nav-dark nav flex-column the-main-navbar">
+                        @can('viewAny', \App\Filial::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('filials')}}">Филиалы</a>
                         </li>
+                        @endcan
                         <hr>
+
+                        @can('viewAny', \App\Order::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('orders')}}">Закупки</a>
                         </li>
+                        @endcan
+
+                        @can('viewAny', \App\Provider::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('providers')}}">Поставщики</a>
                         </li>
+                        @endcan
+                        @can('viewAny', \App\ProviderProducts::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('provider-products')}}">Товары поставщика</a>
                         </li>
+                        @endcan
                         <hr>
+                        @can('viewAny', \App\Product::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('products')}}">Продукты</a>
                         </li>
+                        @endcan
+                        @can('viewAny', \App\ProductGroup::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('groups')}}">Группы продуктов</a>
                         </li>
+                        @endcan
                         <hr>
+                        @can('viewAny', \App\User::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('users')}}">Пользователи</a>
                         </li>
+                        @endcan
+                        @can('viewAny', \App\Role::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('roles')}}">Роли</a>
                         </li>
+                        @endcan
+                        @can('viewAny', \App\Permission::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('permissions')}}">Операции</a>
                         </li>
+                        @endcan
                     </nav>
                 </div>
                 <div class="container bg-white p-4 col-lg-9">

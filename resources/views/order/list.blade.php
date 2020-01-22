@@ -27,7 +27,7 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->getFilial() }}</td>
-                    <td>{{ $order->getUser() }}</td>
+                    <td>{{ $order->getUser()['name'] }}</td>
 
                     <td>
                         <a href="{{ route('order/delete', ['id'=>$order->id]) }}">Удалить</a>

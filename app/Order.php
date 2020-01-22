@@ -19,7 +19,8 @@ class Order extends Model
     }
 
     function getUser() {
-
+        $user = User::find($this->user_id);
+        return $user;
     }
 
     function getSum() {
